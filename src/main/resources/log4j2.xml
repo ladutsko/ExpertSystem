@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" name="ExpertSystem" packages="">
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%m%n" />
+            <Filters>
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+        </Console>
+        <RollingFile name="rollingFile"
+                     fileName="logs/application.log" filePattern="logs/application-%d{yyyy-MM-dd-HH-mm}-%i.log">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd-HH:mm:ss} %-5p %m%n</Pattern>
+                <Charset>UTF-8</Charset>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1MB" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="TRACE">
+            <AppenderRef ref="STDOUT" />
+            <AppenderRef ref="rollingFile" />
+        </Root>
+    </Loggers>
+</Configuration>

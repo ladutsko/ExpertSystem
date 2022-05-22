@@ -1,0 +1,39 @@
+plugins {
+    id 'java' 
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+version = '1.0.0'
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+dependencies {
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.2'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'com.opencsv:opencsv:5.6'
+
+    runtimeOnly 'org.apache.logging.log4j:log4j-core:2.17.2'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2' 
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.github.ladutsko.expertsystem.Application'
+    }
+}
+
+shadowJar {
+    manifest {
+        attributes 'Multi-Release': 'true'
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform() 
+}
+
+repositories {
+    mavenCentral() 
+}
